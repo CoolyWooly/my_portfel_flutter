@@ -13,13 +13,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   LoginBloc _loginBloc;
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _loginBloc.dispose();
     super.dispose();
   }
 
@@ -80,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               new TextField(
                                 // controller: searchController,
                                 keyboardType: TextInputType.emailAddress,
-                                controller: emailController,
+                                controller: _emailController,
                                 decoration: InputDecoration(
                                   hintText: 'Email',
                                   contentPadding: EdgeInsets.symmetric(
@@ -107,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 keyboardType: TextInputType.visiblePassword,
                                 obscureText: true,
                                 enableSuggestions: false,
-                                controller: passwordController,
+                                controller: _passwordController,
                                 autocorrect: false,
                                 decoration: InputDecoration(
                                   hintText: 'Пароль',
@@ -140,8 +141,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: RaisedButton(
                                       onPressed: () {
                                         _loginBloc.postLogin(
-                                            emailController.text,
-                                            passwordController
+                                            _emailController.text,
+                                            _passwordController
                                                 .text); // navigationPage();
                                       },
                                       textColor: Colors.white,
